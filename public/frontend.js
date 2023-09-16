@@ -6,10 +6,9 @@ const socket = io();
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-
 const wintercabin1 = new Sprite({
   position: {
-    x: 0,
+    x: 200,
     y: 0,
   },
   frameRate: 4,
@@ -74,7 +73,7 @@ const wintercabin1 = new Sprite({
 
 const players = {};
 
-socket.on("updatePlayers", backendPlayers => {
+socket.on("updatePlayers", (backendPlayers) => {
   c.clearRect(0, 0, canvas.width, canvas.height);
 
   for (const id in backendPlayers) {
@@ -143,7 +142,6 @@ socket.on("updatePlayers", backendPlayers => {
       players[id].x = backendPlayer.x;
       players[id].y = backendPlayer.y;
     }
-
   }
   for (const id in players) {
     if (!backendPlayers[id]) {
@@ -215,7 +213,7 @@ function animate() {
 
 animate();
 
-window.addEventListener("keydown", event => {
+window.addEventListener("keydown", (event) => {
   switch (event.key) {
     case " ":
       if (players[socket.id].velocity.y === 0)
@@ -245,7 +243,7 @@ window.addEventListener("keydown", event => {
   }
 });
 
-window.addEventListener("keyup", event => {
+window.addEventListener("keyup", (event) => {
   switch (event.key) {
     case "a":
       keys.a.pressed = false;
